@@ -10,44 +10,43 @@ import java.time.LocalDateTime;
 public class WordFrequencyGame {
     public String getResult(String sentence) {
 
-                String[] words = sentence.split("\\s+");
-
-                List<Input> inputList = new ArrayList<>();
-                for (String s : words) {
-                    Input input = new Input(s, 1);
-                    inputList.add(input);
-                }
-
-                Map<String, List<Input>> map =getListMap(inputList);
-
-                List<Input> list = new ArrayList<>();
-                for (Map.Entry<String, List<Input>> entry : map.entrySet()) {
-                    Input input = new Input(entry.getKey(), entry.getValue().size());
-                    list.add(input);
-                }
-                inputList = list;
-
-                inputList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
-
-                StringJoiner joiner = new StringJoiner("\n");
-                for (Input w : inputList) {
-                    String s = w.getValue() + " " +w.getWordCount();
-                    joiner.add(s);
-                }
-                return joiner.toString();
-
+        String[] words = sentence.split("\\s+");
+        Map<String, Integer> countMap = new HashMap<>();
+        for (String word : words) {
+            if (countMap.containsKey(word)) {
+                countMap.put(word, countMap.get(word) + 1);
+            } else {
+                countMap.put(word, 1);
+            }
         }
+
+
+        List<Input> list = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : countMap.entrySet()) {
+            Input input = new Input(entry.getKey(), entry.getValue());
+            list.add(input);
+        }
+
+        list.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
+
+        StringJoiner joiner = new StringJoiner("\n");
+        for (Input w : list) {
+            String s = w.getValue() + " " + w.getWordCount();
+            joiner.add(s);
+        }
+        return joiner.toString();
+
+    }
 
     private Map<String, List<Input>> getListMap(List<Input> inputList) {
         Map<String, List<Input>> map = new HashMap<>();
-        for (Input input : inputList){
+        for (Input input : inputList) {
 //       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
             if (!map.containsKey(input.getValue())) {
                 ArrayList arr = new ArrayList<>();
                 arr.add(input);
                 map.put(input.getValue(), arr);
-            }
-            else {
+            } else {
                 map.get(input.getValue()).add(input);
             }
         }
