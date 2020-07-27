@@ -10,10 +10,6 @@ import java.time.LocalDateTime;
 public class WordFrequencyGame {
     public String getResult(String sentence) {
 
-
-
-            try {
-
                 String[] words = sentence.split("\\s+");
 
                 List<Input> inputList = new ArrayList<>();
@@ -39,9 +35,7 @@ public class WordFrequencyGame {
                     joiner.add(s);
                 }
                 return joiner.toString();
-            } catch (Exception e) {
-                return "Calculate Error";
-            }
+
         }
 
     private Map<String, List<Input>> getListMap(List<Input> inputList) {
