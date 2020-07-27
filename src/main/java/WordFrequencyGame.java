@@ -10,15 +10,7 @@ import java.time.LocalDateTime;
 public class WordFrequencyGame {
     public String getResult(String sentence) {
 
-        String[] words = sentence.split("\\s+");
-        Map<String, Integer> countMap = new HashMap<>();
-        for (String word : words) {
-            if (countMap.containsKey(word)) {
-                countMap.put(word, countMap.get(word) + 1);
-            } else {
-                countMap.put(word, 1);
-            }
-        }
+        Map<String, Integer> countMap = getStringIntegerMap(sentence);
 
 
         List<Input> list = new ArrayList<>();
@@ -36,6 +28,19 @@ public class WordFrequencyGame {
         }
         return joiner.toString();
 
+    }
+
+    private Map<String, Integer> getStringIntegerMap(String sentence) {
+        String[] words = sentence.split("\\s+");
+        Map<String, Integer> countMap = new HashMap<>();
+        for (String word : words) {
+            if (countMap.containsKey(word)) {
+                countMap.put(word, countMap.get(word) + 1);
+            } else {
+                countMap.put(word, 1);
+            }
+        }
+        return countMap;
     }
 
 
