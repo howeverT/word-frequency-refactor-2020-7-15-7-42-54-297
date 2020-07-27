@@ -21,13 +21,17 @@ public class WordFrequencyGame {
 
         list.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
 
+        return getAnswerString(list);
+
+    }
+
+    private String getAnswerString(List<Input> list) {
         StringJoiner joiner = new StringJoiner("\n");
         for (Input w : list) {
             String s = w.getValue() + " " + w.getWordCount();
             joiner.add(s);
         }
         return joiner.toString();
-
     }
 
     private Map<String, Integer> getStringIntegerMap(String sentence) {
