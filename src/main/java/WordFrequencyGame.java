@@ -13,6 +13,13 @@ public class WordFrequencyGame {
         Map<String, Integer> countMap = getStringIntegerMap(sentence);
 
 
+        List<Input> list = getInputsList(countMap);
+
+        return getAnswerString(list);
+
+    }
+
+    private List<Input> getInputsList(Map<String, Integer> countMap) {
         List<Input> list = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : countMap.entrySet()) {
             Input input = new Input(entry.getKey(), entry.getValue());
@@ -20,12 +27,10 @@ public class WordFrequencyGame {
         }
 
         list.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
-
-        return getAnswerString(list);
-
+        return list;
     }
 
-    private String getAnswerString(List<Input> list) {
+        private String getAnswerString(List<Input> list) {
         StringJoiner joiner = new StringJoiner("\n");
         for (Input w : list) {
             String s = w.getValue() + " " + w.getWordCount();
