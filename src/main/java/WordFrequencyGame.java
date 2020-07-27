@@ -11,13 +11,9 @@ public class WordFrequencyGame {
     public String getResult(String sentence) {
 
 
-        if (sentence.split("\\s+").length==1) {
-            return sentence + " 1";
-        } else {
 
             try {
 
-                //split the input string with 1 to n pieces of spaces
                 String[] words = sentence.split("\\s+");
 
                 List<Input> inputList = new ArrayList<>();
@@ -26,7 +22,6 @@ public class WordFrequencyGame {
                     inputList.add(input);
                 }
 
-                //get the map for the next step of sizing the same word
                 Map<String, List<Input>> map =getListMap(inputList);
 
                 List<Input> list = new ArrayList<>();
@@ -48,7 +43,6 @@ public class WordFrequencyGame {
                 return "Calculate Error";
             }
         }
-    }
 
     private Map<String, List<Input>> getListMap(List<Input> inputList) {
         Map<String, List<Input>> map = new HashMap<>();
